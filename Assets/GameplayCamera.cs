@@ -11,8 +11,7 @@ public class GameplayCamera : MonoBehaviour {
 
 	void Update() {
         float x = target.transform.position.x;
-        float y = target.transform.position.y;
 
-        this.transform.position = new Vector3(x, y, this.transform.position.z);
+        this.transform.position = new Vector3(x, 0, this.transform.position.z);
 	}
 }

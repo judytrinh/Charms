@@ -12,10 +12,10 @@ public class GameManager : MonoBehaviour {
 	void Start() {
         talismanPrefab = Resources.Load("Talisman");
         TALISMAN_START_X = -5.0f;
-        TALISMAN_END_X = 30.0f;
+        TALISMAN_END_X = 175.0f;
         TALISMAN_TOP_Y = 5.0f;
         TALISMAN_BOTTOM_Y = -5.0f;
-        TALISMAN_NUM = 25;
+        TALISMAN_NUM = 150;
 
         float interval = (TALISMAN_END_X - TALISMAN_START_X) / TALISMAN_NUM;
         for (int i = 0; i < TALISMAN_NUM; i++) {
