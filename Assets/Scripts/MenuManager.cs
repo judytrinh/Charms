@@ -18,6 +18,7 @@ public class MenuManager : MonoBehaviour {
     void OnGUI() {
         if (GUI.Button(new Rect(BUTTON_POS_X, BUTTON_POS_Y, BUTTON_WIDTH, BUTTON_HEIGHT), "Play")) {
             Debug.Log("Play");
+            Application.LoadLevel("GameplayScene");
         }
         if (GUI.Button(new Rect(BUTTON_POS_X, BUTTON_POS_Y + BUTTON_HEIGHT + 10, BUTTON_WIDTH, BUTTON_HEIGHT), "About")) {
             Debug.Log("About");
