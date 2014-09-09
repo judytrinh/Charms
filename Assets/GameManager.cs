@@ -2,14 +2,33 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
+    Object talismanPrefab;
+    float TALISMAN_START_X;
+    float TALISMAN_END_X;
+    float TALISMAN_TOP_Y;
+    float TALISMAN_BOTTOM_Y;
+    int TALISMAN_NUM;
 
-	// Use this for initialization
-	void Start () {
-	
+	void Start() {
+        talismanPrefab = Resources.Load("Talisman");
+        TALISMAN_START_X = -5.0f;
+        TALISMAN_END_X = 30.0f;
+        TALISMAN_TOP_Y = 5.0f;
+        TALISMAN_BOTTOM_Y = -5.0f;
+        TALISMAN_NUM = 25;
+
+        float interval = (TALISMAN_END_X - TALISMAN_START_X) / TALISMAN_NUM;
+        for (int i = 0; i < TALISMAN_NUM; i++) {
+            Vector3 pos = new Vector3(TALISMAN_START_X + interval * i, TALISMAN_TOP_Y, 0);
+            GameObject talisman = Instantiate(talismanPrefab, pos, Quaternion.identity) as GameObject;
+        }
+        for (int i = 0; i < TALISMAN_NUM; i++) {
+            Vector3 pos = new Vector3(TALISMAN_START_X + interval * i, TALISMAN_BOTTOM_Y, 0);
+            GameObject talisman = Instantiate(talismanPrefab, pos, Quaternion.identity) as GameObject;
+        }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void Update() {
+	    
 	}
 }
