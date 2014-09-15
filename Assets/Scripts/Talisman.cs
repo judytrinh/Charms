@@ -9,19 +9,50 @@ public class Talisman : MonoBehaviour {
     float TALISMAN_BOTTOM_Y;
     float SPEED;
 
+    public Material RED;
+    public Material BLUE;
+    public Material DIAMOND;
+    public Material GREEN;
+    public Material GOLD;
+
+    Charms.TalismanType TALISMAN_TYPE;
+
 	void Start() {
         atTheTop = false;
+        TALISMAN_TYPE = Charms.TalismanType.RED;
 	}
 
     //====================================================================================================
     // Used as an initializer later when we want different types of talisman
-    // TODO: write enum, include type as param
     //====================================================================================================
-    public void Create(bool top, float topY, float bottomY) {
+    public void Create(Charms.TalismanType type, bool top, float topY, float bottomY) {
         this.atTheTop = top;
         this.TALISMAN_TOP_Y = topY;
         this.TALISMAN_BOTTOM_Y = bottomY;
         this.SPEED = 0.2f;
+
+        TALISMAN_TYPE = type;
+
+        switch (type) {
+            case Charms.TalismanType.BLUE:
+                renderer.material = BLUE;
+                break;
+            case Charms.TalismanType.RED:
+                renderer.material = RED;
+                break;
+            case Charms.TalismanType.DIAMOND:
+                renderer.material= DIAMOND;
+                break;
+            case Charms.TalismanType.GREEN:
+                renderer.material = GREEN;
+                break;
+            case Charms.TalismanType.GOLD:
+                renderer.material = GOLD;
+                break;
+            default:
+                renderer.material = GOLD;
+                break;
+        };
     }
 
     //====================================================================================================

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+namespace Charms { 
+    public enum TalismanType{RED, GREEN, GOLD, BLUE, DIAMOND};
+}
+
 public class GameManager : MonoBehaviour {
     Object talismanPrefab;
     Object obstaclePrefab;
@@ -20,6 +24,7 @@ public class GameManager : MonoBehaviour {
         TALISMAN_BOTTOM_Y = -5.0f;
         TALISMAN_NUM = 150;
 
+
         //====================================================================================================
         // Instantiate talisman locations
         //====================================================================================================
@@ -27,12 +32,12 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < TALISMAN_NUM; i++) {
             Vector3 pos = new Vector3(TALISMAN_START_X + interval * i, TALISMAN_TOP_Y, 1);
             GameObject talisman = Instantiate(talismanPrefab, pos, Quaternion.identity) as GameObject;
-            talisman.GetComponent<Talisman>().Create(true, TALISMAN_TOP_Y, TALISMAN_BOTTOM_Y);
+            talisman.GetComponent<Talisman>().Create(Charms.TalismanType.RED, true, TALISMAN_TOP_Y, TALISMAN_BOTTOM_Y);
         }
         for (int i = 0; i < TALISMAN_NUM; i++) {
             Vector3 pos = new Vector3(TALISMAN_START_X + interval * i, TALISMAN_BOTTOM_Y, 0);
             GameObject talisman = Instantiate(talismanPrefab, pos, Quaternion.identity) as GameObject;
-            talisman.GetComponent<Talisman>().Create(false, TALISMAN_TOP_Y, TALISMAN_BOTTOM_Y);
+            talisman.GetComponent<Talisman>().Create(Charms.TalismanType.BLUE, false, TALISMAN_TOP_Y, TALISMAN_BOTTOM_Y);
         }
         //====================================================================================================
         // Instantiate obstacle locations
