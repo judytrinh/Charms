@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     // References
     public GameObject healthText;
     public GameObject onDeckText;
+    public GameObject amountLeft;
 
     GUIText onDeckGuiText;
 
@@ -27,8 +28,10 @@ public class GameManager : MonoBehaviour {
 
     int health;
     List<Charms.TalismanType> onDeckTalisman;
+    public int numLeft;
 
     void Awake() {
+        numLeft = 15;
         
         TALISMAN_SELECTION = new Charms.TalismanType[5];
         TALISMAN_SELECTION[0] = Charms.TalismanType.RED;
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour {
         TALISMAN_SELECTION[4] = Charms.TalismanType.DIAMOND;
 
         onDeckTalisman = new List<Charms.TalismanType>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 15; i++) {
             int typeIndex = Random.Range(0, TALISMAN_SELECTION.Length - 1);
             onDeckTalisman.Add(TALISMAN_SELECTION[typeIndex]);
 //            Debug.Log(onDeckTalisman[i]);
@@ -56,7 +59,7 @@ public class GameManager : MonoBehaviour {
         TALISMAN_TOP_Y = 5.0f;
         TALISMAN_BOTTOM_Y = -5.0f;
         TALISMAN_NUM = 150;
-        MAX_HEALTH = 100;
+        MAX_HEALTH = 200;
 
         health = MAX_HEALTH;
 
@@ -91,8 +94,8 @@ public class GameManager : MonoBehaviour {
         //====================================================================================================
         // Instantiate obstacle locations
         //====================================================================================================
-        for (int i = 0; i < TALISMAN_NUM / 4; i++) {
-            Vector3 pos = new Vector3(TALISMAN_START_X + interval * i * 6, Random.Range(TALISMAN_TOP_Y - 1.5f, TALISMAN_BOTTOM_Y + 1.5f), 0);
+        for (int i = 0; i < 250; i++) {
+            Vector3 pos = new Vector3(TALISMAN_START_X + interval * i * 7, Random.Range(TALISMAN_TOP_Y - 1.5f, TALISMAN_BOTTOM_Y + 1.5f), 0);
             GameObject obstacle = Instantiate(obstaclePrefab, pos, Quaternion.identity) as GameObject;
             float newScale = Random.Range(0.5f, 2.0f);
             obstacle.transform.localScale = new Vector3(newScale, newScale, newScale);
@@ -118,9 +121,13 @@ public class GameManager : MonoBehaviour {
     public void NextTalisman() {
         onDeckTalisman.RemoveAt(0);
         Debug.Log(onDeckTalisman [0]);
+        numLeft--;
     }
 
 	void Update() {
+
+        amountLeft.GetComponent<GUIText>().text = numLeft + " Left!"; 
+
         Charms.TalismanType type = GetOnDeckTalisman();
         switch (type) {
             case Charms.TalismanType.BLUE:

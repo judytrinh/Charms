@@ -7,6 +7,7 @@ public class Ship : MonoBehaviour {
     Vector3 SPEED;
 
     void Start() {
+
         SPEED = new Vector3(0.18f, 0.15f, 0);
 
         rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;

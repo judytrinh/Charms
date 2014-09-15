@@ -17,6 +17,9 @@ public class Talisman : MonoBehaviour {
 
     Charms.TalismanType TALISMAN_TYPE;
 
+    public AudioClip jewelSound;
+    public AudioSource jSound;
+
 	void Start() {
         atTheTop = false;
 	}
@@ -28,7 +31,7 @@ public class Talisman : MonoBehaviour {
         this.atTheTop = top;
         this.TALISMAN_TOP_Y = topY;
         this.TALISMAN_BOTTOM_Y = bottomY;
-        this.SPEED = 0.3f;
+        this.SPEED = 0.4f;
 
         TALISMAN_TYPE = type;
 
@@ -91,6 +94,10 @@ public class Talisman : MonoBehaviour {
 
     public void SetType(Charms.TalismanType t) {
         TALISMAN_TYPE = t;
+    }
+
+    void OnDestory() {
+        audio.Play();
     }
 
 	void Update() {
