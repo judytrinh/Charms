@@ -8,6 +8,8 @@ namespace Charms {
 
 public class GameManager : MonoBehaviour {
     // References
+    public GameObject youLose;
+
     public GameObject healthText;
     public GameObject onDeckText;
     public GameObject amountLeft;
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour {
     }
 
 	void Start() {
+
+        youLose.GetComponent<GUIText>().text = "";
         talismanPrefab = Resources.Load("Talisman");
         obstaclePrefab = Resources.Load("Obstacle");
 
@@ -125,7 +129,9 @@ public class GameManager : MonoBehaviour {
     }
 
 	void Update() {
-
+        if (health == 0)
+            youLose.GetComponent<GUIText>().text = "You Lose";
+        
         amountLeft.GetComponent<GUIText>().text = numLeft + " Left!"; 
 
         Charms.TalismanType type = GetOnDeckTalisman();
