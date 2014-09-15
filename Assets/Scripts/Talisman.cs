@@ -19,7 +19,6 @@ public class Talisman : MonoBehaviour {
 
 	void Start() {
         atTheTop = false;
-        TALISMAN_TYPE = Charms.TalismanType.RED;
 	}
 
     //====================================================================================================
@@ -29,7 +28,7 @@ public class Talisman : MonoBehaviour {
         this.atTheTop = top;
         this.TALISMAN_TOP_Y = topY;
         this.TALISMAN_BOTTOM_Y = bottomY;
-        this.SPEED = 0.2f;
+        this.SPEED = 0.3f;
 
         TALISMAN_TYPE = type;
 
@@ -86,6 +85,14 @@ public class Talisman : MonoBehaviour {
         }
     }
 	
+    public Charms.TalismanType GetTalismanType() {
+        return TALISMAN_TYPE;
+    }
+
+    public void SetType(Charms.TalismanType t) {
+        TALISMAN_TYPE = t;
+    }
+
 	void Update() {
         if (Input.GetKey(KeyCode.Space)) {
             isChangingSides = true;

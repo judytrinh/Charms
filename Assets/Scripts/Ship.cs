@@ -14,20 +14,37 @@ public class Ship : MonoBehaviour {
 
     void OnCollisionEnter(Collision c) {
         if (c.gameObject.tag == "Talisman") {
-            gameManager.GetComponent<GameManager>().AddHealth(10);
+            Debug.Log("color of collided: " + c.gameObject.GetComponent<Talisman>().GetTalismanType());
+            Debug.Log("color of on deck: " + gameManager.GetComponent<GameManager>().GetOnDeckTalisman());
+            if (c.gameObject.GetComponent<Talisman>().GetTalismanType() == gameManager.GetComponent<GameManager>().GetOnDeckTalisman()) {
+                Debug.Log(gameManager.GetComponent<GameManager>().GetOnDeckTalisman());
+                gameManager.GetComponent<GameManager>().AddHealth(10);
+                gameManager.GetComponent<GameManager>().NextTalisman();
+            } else {
+                gameManager.GetComponent<GameManager>().RemoveHealth(10);
+            }
+            Destroy(c.gameObject);
         }
         if (c.gameObject.tag == "Obstacle") {
             Debug.Log("COLLIDED WITH OBSTACLES");
             gameManager.GetComponent<GameManager>().RemoveHealth(20);
+            Destroy(c.gameObject);
         }
     }
 
     void Update() {
 
         if (Input.GetKey(KeyCode.UpArrow)) {
-            transform.Translate(new Vector3(0, SPEED.y, 0), Space.World);
+            
+            if (transform.position.y + SPEED.y > 3.45f) 
+                transform.position = new Vector3(transform.position.x, 3.45f, transform.position.z);
+            else
+                transform.Translate(new Vector3(0, SPEED.y, 0), Space.World);
         } else if (Input.GetKey(KeyCode.DownArrow)) {
-            transform.Translate(new Vector3(0, -SPEED.y, 0), Space.World);
+            if (transform.position.y - SPEED.y < -3.45f) 
+                transform.position = new Vector3(transform.position.x, -3.45f, transform.position.z);
+            else
+                transform.Translate(new Vector3(0, -SPEED.y, 0), Space.World);
         }
 
         transform.Translate(new Vector3(SPEED.x, 0, 0), Space.World);
