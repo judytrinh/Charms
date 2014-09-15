@@ -6,6 +6,14 @@ public class Ship : MonoBehaviour {
 
     void Start() {
         SPEED = new Vector3(0.1f, 0.1f, 0);
+
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+    }
+
+    void OnCollisionEnter(Collision c) {
+        if (c.gameObject.tag == "Talisman") {
+            Debug.Log("COLLIDED");
+        }
     }
 
     void Update() {
