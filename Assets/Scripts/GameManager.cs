@@ -8,6 +8,8 @@ namespace Charms {
 
 public class GameManager : MonoBehaviour {
     // References
+    public GameObject healthText;
+
     Object talismanPrefab;
     Object obstaclePrefab;
 
@@ -17,6 +19,7 @@ public class GameManager : MonoBehaviour {
     float TALISMAN_TOP_Y;
     float TALISMAN_BOTTOM_Y;
     int TALISMAN_NUM;
+    int MAX_HEALTH;
     Charms.TalismanType[] TALISMAN_SELECTION;
 
     int health;
@@ -31,9 +34,10 @@ public class GameManager : MonoBehaviour {
         TALISMAN_TOP_Y = 5.0f;
         TALISMAN_BOTTOM_Y = -5.0f;
         TALISMAN_NUM = 150;
+        MAX_HEALTH = 100;
         Charms.TalismanType[] TALISMAN_SELECTION = {Charms.TalismanType.RED, Charms.TalismanType.GREEN, Charms.TalismanType.GOLD, Charms.TalismanType.BLUE, Charms.TalismanType.DIAMOND};
 
-        health = 100;
+        health = MAX_HEALTH;
 
         List<Charms.TalismanType> onDeckTalisman = new List<Charms.TalismanType>();
         for (int i = 0; i < 100; i++) {
@@ -48,12 +52,12 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < TALISMAN_NUM; i++) {
             Vector3 pos = new Vector3(TALISMAN_START_X + interval * i, TALISMAN_TOP_Y, 0);
             GameObject talisman = Instantiate(talismanPrefab, pos, Quaternion.identity) as GameObject;
-            talisman.GetComponent<Talisman>().Create(Charms.TalismanType.RED, true, TALISMAN_TOP_Y, TALISMAN_BOTTOM_Y);
+            talisman.GetComponent<Talisman>().Create(TALISMAN_SELECTION[Random.Range(0, TALISMAN_SELECTION.Length - 1)], true, TALISMAN_TOP_Y, TALISMAN_BOTTOM_Y);
         }
         for (int i = 0; i < TALISMAN_NUM; i++) {
             Vector3 pos = new Vector3(TALISMAN_START_X + interval * i, TALISMAN_BOTTOM_Y, 0);
             GameObject talisman = Instantiate(talismanPrefab, pos, Quaternion.identity) as GameObject;
-            talisman.GetComponent<Talisman>().Create(Charms.TalismanType.BLUE, false, TALISMAN_TOP_Y, TALISMAN_BOTTOM_Y);
+                talisman.GetComponent<Talisman>().Create(TALISMAN_SELECTION[Random.Range(0, TALISMAN_SELECTION.Length - 1)], false, TALISMAN_TOP_Y, TALISMAN_BOTTOM_Y);
         }
         //====================================================================================================
         // Instantiate obstacle locations
@@ -65,6 +69,18 @@ public class GameManager : MonoBehaviour {
             obstacle.transform.localScale = new Vector3(newScale, newScale, newScale);
         }
 	}
+
+    public void AddHealth(int h) {
+        health = (health + h > MAX_HEALTH) ? MAX_HEALTH : health + h;
+        Debug.Log(health);
+        healthText.GetComponent<GUIText>().text = "Health: " + health;
+    }
+
+    public void RemoveHealth(int h) {
+        health = (health - h < 0) ? 0 : health - h;
+        Debug.Log(health);
+        healthText.GetComponent<GUIText>().text = "Health: " + health;
+    }
 
 	void Update() {
 	    

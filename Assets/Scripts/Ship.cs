@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class Ship : MonoBehaviour {
+    public GameObject gameManager;
+
     Vector3 SPEED;
 
     void Start() {
@@ -12,7 +14,11 @@ public class Ship : MonoBehaviour {
 
     void OnCollisionEnter(Collision c) {
         if (c.gameObject.tag == "Talisman") {
-            Debug.Log("COLLIDED");
+            gameManager.GetComponent<GameManager>().AddHealth(10);
+        }
+        if (c.gameObject.tag == "Obstacle") {
+            Debug.Log("COLLIDED WITH OBSTACLES");
+            gameManager.GetComponent<GameManager>().RemoveHealth(20);
         }
     }
 
