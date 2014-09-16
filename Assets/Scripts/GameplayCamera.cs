@@ -48,6 +48,6 @@ public class GameplayCamera : MonoBehaviour {
 
         if (isShaking) ShakeTranslate();
 
-        cameraContainer.transform.position = new Vector3(x, 0, -10.0f);
+        cameraContainer.transform.position = new Vector3(x, 0, -3.0f);
 	}
 }

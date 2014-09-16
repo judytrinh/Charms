@@ -24,6 +24,7 @@ public class Ship : MonoBehaviour {
             } else {
                 gameManager.GetComponent<GameManager>().RemoveHealth(10);
             }
+            Camera.main.gameObject.transform.parent.gameObject.audio.Play();
             Destroy(c.gameObject);
         }
         if (c.gameObject.tag == "Obstacle") {

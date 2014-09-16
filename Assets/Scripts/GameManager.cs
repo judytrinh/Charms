@@ -8,9 +8,12 @@ namespace Charms {
 
 public class GameManager : MonoBehaviour {
     // References
+    public AudioClip mainSong;
+
     public GameObject youLose;
     bool win;
     bool lose;
+    bool stateSet;
 
     public GameObject healthText;
     public GameObject onDeckText;
@@ -53,6 +56,7 @@ public class GameManager : MonoBehaviour {
     }
 
 	void Start() {
+        stateSet = false;
         healthText.GetComponent<GUIText>().color = Color.green;
 
         youLose.GetComponent<GUIText>().text = "";
@@ -65,7 +69,7 @@ public class GameManager : MonoBehaviour {
         TALISMAN_END_X = 175.0f;
         TALISMAN_TOP_Y = 5.0f;
         TALISMAN_BOTTOM_Y = -5.0f;
-        TALISMAN_NUM = 150;
+        TALISMAN_NUM = 300;
         MAX_HEALTH = 200;
 
         health = MAX_HEALTH;
@@ -78,7 +82,7 @@ public class GameManager : MonoBehaviour {
 
         float interval = (TALISMAN_END_X - TALISMAN_START_X) / TALISMAN_NUM;
         for (int i = 0; i < TALISMAN_NUM; i++) {
-            float realInterval = Random.Range(1.5f, 7.0f);
+            float realInterval = Random.Range(2.0f, 8.0f);
             float newLoc = lastXLocation + realInterval;
             Vector3 pos = new Vector3(newLoc, TALISMAN_TOP_Y, 0);
             GameObject talisman = Instantiate(talismanPrefab, pos, Quaternion.identity) as GameObject;
@@ -138,11 +142,17 @@ public class GameManager : MonoBehaviour {
     }
 
     void YouLose() {
-        youLose.GetComponent<GUIText>().text = "You Win!";
+        if (!stateSet) {
+            youLose.GetComponent<GUIText>().text = "You Lose!";
+            stateSet = true;
+        }
     }
 
     void YouWin() {
-        youLose.GetComponent<GUIText>().text = "You Win!";
+        if (!stateSet) {
+            youLose.GetComponent<GUIText>().text = "You Win!";
+            stateSet = true;
+        }
     }
 
     public Charms.TalismanType GetOnDeckTalisman() {

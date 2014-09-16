@@ -17,9 +17,6 @@ public class Talisman : MonoBehaviour {
 
     Charms.TalismanType TALISMAN_TYPE;
 
-    public AudioClip jewelSound;
-    public AudioSource jSound;
-
 	void Start() {
         atTheTop = false;
 	}
@@ -100,11 +97,9 @@ public class Talisman : MonoBehaviour {
     }
 
     void OnDestory() {
-        audio.Play();
     }
 
 	void Update() {
-//        GameObject taliModel = this.gameObject.transform.GetChild(0).gameObject;
         gameObject.transform.Rotate(new Vector3(0, 5.0f, 0));
 
         if (Input.GetKey(KeyCode.Space)) {
