@@ -9,6 +9,8 @@ namespace Charms {
 public class GameManager : MonoBehaviour {
     // References
     public GameObject youLose;
+    bool win;
+    bool lose;
 
     public GameObject healthText;
     public GameObject onDeckText;
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour {
     }
 
 	void Start() {
+        healthText.GetComponent<GUIText>().color = Color.green;
 
         youLose.GetComponent<GUIText>().text = "";
         talismanPrefab = Resources.Load("Talisman");
@@ -108,14 +111,38 @@ public class GameManager : MonoBehaviour {
 
     public void AddHealth(int h) {
         health = (health + h > MAX_HEALTH) ? MAX_HEALTH : health + h;
-        Debug.Log(health);
-        healthText.GetComponent<GUIText>().text = "Health: " + health;
+        GUIText g = healthText.GetComponent<GUIText>();
+        g.text = "Health: " + health;
+        if (health > 150) {
+            g.color = Color.green;
+        } else if (health <= 150 && health > 75) {
+            g.color = Color.yellow;
+        } else if (health <= 75) {
+            g.color = Color.red;
+        }
     }
 
     public void RemoveHealth(int h) {
         health = (health - h < 0) ? 0 : health - h;
-        Debug.Log(health);
         healthText.GetComponent<GUIText>().text = "Health: " + health;
+        if (health == 0) YouLose();
+        GUIText g = healthText.GetComponent<GUIText>();
+        g.text = "Health: " + health;
+        if (health > 150) {
+            g.color = Color.green;
+        } else if (health <= 150 && health > 75) {
+            g.color = Color.yellow;
+        } else if (health <= 75) {
+            g.color = Color.red;
+        }
+    }
+
+    void YouLose() {
+        youLose.GetComponent<GUIText>().text = "You Win!";
+    }
+
+    void YouWin() {
+        youLose.GetComponent<GUIText>().text = "You Win!";
     }
 
     public Charms.TalismanType GetOnDeckTalisman() {
@@ -130,6 +157,7 @@ public class GameManager : MonoBehaviour {
             onDeckTalisman.RemoveAt(0);
             numLeft--;
             if (numLeft > 0) Debug.Log(onDeckTalisman[0]);
+            else YouWin();
         }
     }
 
