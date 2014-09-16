@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Charms { 
-    public enum TalismanType{RED, GREEN, GOLD, BLUE, DIAMOND};
+    public enum TalismanType{RED, GREEN, GOLD, BLUE, DIAMOND, NONE};
 }
 
 public class GameManager : MonoBehaviour {
@@ -119,13 +119,18 @@ public class GameManager : MonoBehaviour {
     }
 
     public Charms.TalismanType GetOnDeckTalisman() {
-        return onDeckTalisman[0];
+        if (numLeft > 0)
+            return onDeckTalisman[0];
+        else
+            return Charms.TalismanType.NONE;
     }
 
     public void NextTalisman() {
-        onDeckTalisman.RemoveAt(0);
-        Debug.Log(onDeckTalisman [0]);
-        numLeft--;
+        if (numLeft > 0) {
+            onDeckTalisman.RemoveAt(0);
+            numLeft--;
+            if (numLeft > 0) Debug.Log(onDeckTalisman[0]);
+        }
     }
 
 	void Update() {
@@ -155,6 +160,8 @@ public class GameManager : MonoBehaviour {
             case Charms.TalismanType.GOLD:
                 onDeckGuiText.text = "GOLD";
                 onDeckGuiText.color = Color.yellow;
+                break;
+            case Charms.TalismanType.NONE:
                 break;
             default:
                 onDeckGuiText.text = "GOLD";

@@ -29,7 +29,7 @@ public class Ship : MonoBehaviour {
         if (c.gameObject.tag == "Obstacle") {
             Debug.Log("COLLIDED WITH OBSTACLES");
             gameManager.GetComponent<GameManager>().RemoveHealth(20);
-            Destroy(c.gameObject);
+            Destroy(c.gameObject.transform.parent.transform.parent.gameObject);
             Camera.main.gameObject.GetComponent<GameplayCamera>().ShakeMe(0.20f);
         }
     }

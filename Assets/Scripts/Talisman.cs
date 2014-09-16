@@ -35,24 +35,27 @@ public class Talisman : MonoBehaviour {
 
         TALISMAN_TYPE = type;
 
+        GameObject taliModel = this.gameObject.transform.GetChild(0).gameObject;
+        taliModel.transform.localPosition = new Vector3(1f, -1f, 0);
+
         switch (type) {
             case Charms.TalismanType.BLUE:
-                renderer.material = BLUE;
+                taliModel.renderer.material = BLUE;
                 break;
             case Charms.TalismanType.RED:
-                renderer.material = RED;
+                taliModel.renderer.material = RED;
                 break;
             case Charms.TalismanType.DIAMOND:
-                renderer.material= DIAMOND;
+                taliModel.renderer.material= DIAMOND;
                 break;
             case Charms.TalismanType.GREEN:
-                renderer.material = GREEN;
+                taliModel.renderer.material = GREEN;
                 break;
             case Charms.TalismanType.GOLD:
-                renderer.material = GOLD;
+                taliModel.renderer.material = GOLD;
                 break;
             default:
-                renderer.material = GOLD;
+                taliModel.renderer.material = GOLD;
                 break;
         };
     }
@@ -101,6 +104,9 @@ public class Talisman : MonoBehaviour {
     }
 
 	void Update() {
+//        GameObject taliModel = this.gameObject.transform.GetChild(0).gameObject;
+        gameObject.transform.Rotate(new Vector3(0, 5.0f, 0));
+
         if (Input.GetKey(KeyCode.Space)) {
             isChangingSides = true;
         }
