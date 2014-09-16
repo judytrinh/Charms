@@ -30,6 +30,7 @@ public class Ship : MonoBehaviour {
             Debug.Log("COLLIDED WITH OBSTACLES");
             gameManager.GetComponent<GameManager>().RemoveHealth(20);
             Destroy(c.gameObject);
+            Camera.main.gameObject.GetComponent<GameplayCamera>().ShakeMe(0.20f);
         }
     }
 

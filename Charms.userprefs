@@ -1,10 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameplayCamera.cs">
     <Files>
-      <File FileName="Assets/Scripts/Talisman.cs" Line="28" Column="62" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="44" Column="9" />
-      <File FileName="Assets/Scripts/Ship.cs" Line="13" Column="18" />
+      <File FileName="Assets/Scripts/Talisman.cs" Line="39" Column="15" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="139" Column="15" />
+      <File FileName="Assets/Scripts/Ship.cs" Line="45" Column="50" />
+      <File FileName="Assets/Scripts/GameplayCamera.cs" Line="21" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
